@@ -15,22 +15,25 @@
     {% if user.plants %}
     <ul>
         {% for plant in user.plants %}
-        <li>{{ plant.name }}</li>
+        <li><a href="/plant/{{plant._id}}"> {{ plant.name }} the {{plant.species.name}}</a></li>
         {% endfor %}
     </ul>
     {% else %}
     <p>This user has no plants.</p>
     {% endif %}
     <h3>Add a plant</h3>
-    <form action="/profile/{{user.username}}" method="post">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name">
+    <form action="/create_plant" method="post">
+        <label for="plant_name">Name</label>
+        <input type="text" name="plant_name" id="plant_name">
         <label for="species">Species</label>
         <select name="species" id="species">
             {% for species in species %}
-            <option value="{{species}}">{{species}}</option>
+            <option value="{{species._id}}">{{species.name}}</option>
             {% endfor %}
         </select>
+        <input type="hidden" value="{{user._id}}" name="user_id" id="user_id">
+        <input type="hidden" value="{{user.username}}" name="username" id="username">
+
         <input type="submit" value="Add Plant">
 </body>
 

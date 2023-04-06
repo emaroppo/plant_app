@@ -13,7 +13,7 @@ db = client.plant_db
 collection = db.plant_species
 
 # open json file
-with open("db_utils/plant.json") as data_file:
+with open("db_utils/import/reference_data/plant.json") as data_file:
     data = json.load(data_file)
     count = 0
     loaded_plants = list(collection.find({}, {"name": 1}))
@@ -26,7 +26,6 @@ with open("db_utils/plant.json") as data_file:
             plant_id = collection.insert_one(i).inserted_id
             print(f'Inserted {i["name"]}  with id {plant_id}')
             count += 1
+    print(f"Inserted {count} new plants")
 
     collection.create_index([("name", pymongo.ASCENDING)], unique=True)
-
-    print(f"Inserted {count} new plants")

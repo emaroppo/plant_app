@@ -60,8 +60,32 @@ def users():
 @app.route("/profile/<username>")
 def profile(username):
     db = DBManager("plant_db")
-    user = db.user.get_user(username)
-    return render_template("profile.html", user=user)
+    user = db.user.get_user(username, deref=True)
+    species = db.plant.get_plants()
+    return render_template("profile.html", user=user, species=species)
+
+
+@app.route("/create_plant", methods=["GET", "POST"])
+def create_plant():
+    if request.method == "POST":
+        db = DBManager("plant_db")
+
+        plant = dict()
+        plant["name"] = request.form["plant_name"]
+        plant["species"] = request.form["species"]
+        plant["owner"] = request.form["user_id"]
+
+        plant_id = db.add_user_plant(plant)
+        flash("Plant created successfully")
+
+        return redirect(url_for("profile", username=request.form["username"]))
+
+
+@app.route("/plant/<plant_id>")
+def plant(plant_id):
+    db = DBManager("plant_db")
+    plant = db.user_plants.get_user_plant(plant_id, deref=True)
+    return render_template("plant.html", plant=plant)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 from db_utils.collections.collection import Collection
+from bson import ObjectId, DBRef
 
 
 class UserCollection(Collection):
@@ -17,12 +18,27 @@ class UserCollection(Collection):
         users = self.collection.find({})
         return users
 
-    def get_user(self, username=None, user_id=None):
+    def get_user(self, username=None, user_id=None, deref=False):
         if username:
             user = self.collection.find_one({"username": username})
-            return user
         elif user_id:
+            user_id = ObjectId(user_id)
             user = self.collection.find_one({"_id": user_id})
-            return user
         else:
             raise ValueError("Must provide either username or user_id")
+
+        if user["plants"] and deref:
+            print(user["plants"])
+            user["plants"] = [self.db.dereference(i) for i in user["plants"]]
+            for i in user["plants"]:
+                i["species"] = self.db.dereference(i["species"])
+
+        return user
+
+    def add_plant_to_user(self, user_id, plant_id):
+        user_id = ObjectId(user_id)
+        plant_id = ObjectId(plant_id)
+        self.collection.update_one(
+            {"_id": user_id}, {"$push": {"plants": DBRef("user_plants", plant_id)}}
+        )
+        return plant_id
