@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
 
-<head>
-    <title>Sign Up</title>
-</head>
+<h1>Sign Up</h1>
+<form action="/signup" method="post">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password">
 
-<body>
-    <h1>Sign Up</h1>
-    <form action="/signup" method="post">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-
-        <input type="submit" value="Sign Up">
-    </form>
-</body>
-
-</html>
+    <input type="submit" value="Sign Up">
+</form>
+{% endblock %}

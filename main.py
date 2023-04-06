@@ -1,5 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from db_utils.db_manager import DBManager
+from bson.objectid import ObjectId
+from pymongo import MongoClient
+from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = "secret"
@@ -14,7 +17,7 @@ def home():
 def signup():
     if request.method == "POST":
         username = request.form["username"]
-        password = request.form["password"]
+        password = generate_password_hash(request.form["password"])
         email = request.form["email"]
         db = DBManager("plant_db")
         user = db.user.get_user(username)
@@ -38,9 +41,14 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+        print(password)
         db = DBManager("plant_db")
         user = db.user.get_user(username)
-        if user and user["password"] == password:
+        print(user)
+        print(check_password_hash(user["password"], password))
+        if user and check_password_hash(user["password"], password):
+            session["user_id"] = str(user["_id"])
+            session["username"] = user["username"]
             flash("Login successful")
             return redirect(url_for("home"))
         else:
@@ -48,6 +56,13 @@ def login():
             return redirect(url_for("login"))
 
     return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    session.pop("user_id", None)
+    session.pop("username", None)
+    return redirect(url_for("home"))
 
 
 @app.route("/users")
@@ -62,7 +77,11 @@ def profile(username):
     db = DBManager("plant_db")
     user = db.user.get_user(username, deref=True)
     species = db.plant.get_plants()
-    return render_template("profile.html", user=user, species=species)
+
+    if "user_id" in session and str(user["_id"]) == session["user_id"]:
+        return render_template("my_profile.html", user=user, species=species)
+    else:
+        return render_template("profile.html", user=user, species=species)
 
 
 @app.route("/create_plant", methods=["GET", "POST"])

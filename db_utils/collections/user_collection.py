@@ -27,11 +27,12 @@ class UserCollection(Collection):
         else:
             raise ValueError("Must provide either username or user_id")
 
-        if user["plants"] and deref:
-            print(user["plants"])
-            user["plants"] = [self.db.dereference(i) for i in user["plants"]]
-            for i in user["plants"]:
-                i["species"] = self.db.dereference(i["species"])
+        if user:
+            if "plants" in user and user["plants"] and deref:
+                print(user["plants"])
+                user["plants"] = [self.db.dereference(i) for i in user["plants"]]
+                for i in user["plants"]:
+                    i["species"] = self.db.dereference(i["species"])
 
         return user
 

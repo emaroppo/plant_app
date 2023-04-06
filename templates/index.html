@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% block title %}My App{% endblock %}
+{% block content %}
+<h1>Plant App</h1>
+<p>Some day, a home page...</p>
+<a href="{{ url_for('users') }}">Users</a>
 
-<head>
-    <title>My App</title>
-</head>
-
-<body>
-    <h1>My App</h1>
-    <p>My App is a great app.</p>
-    <a href="/users">Users</a>
-    <a href="/signup">Sign up</a>
-</body>
+{% endblock %}

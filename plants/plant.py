@@ -15,6 +15,3 @@ class Plant:
                 setattr(self, key, dictionary[key])
         for key in kwargs:
             setattr(self, key, kwargs[key])
-
-    def water(self):
-        self.last_watered = datetime.now()
