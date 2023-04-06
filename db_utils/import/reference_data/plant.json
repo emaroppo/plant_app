@@ -1,0 +1,494 @@
+[
+    {
+        "name": "Chinese Evergreen",
+        "watering": 14,
+        "light": {
+            "min": 2,
+            "max": 6
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Peace Lily",
+        "watering": 7,
+        "light": {
+            "min": 1,
+            "max": 5
+        },
+        "ph": [
+            5.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Dracaena",
+        "watering": 14,
+        "light": {
+            "min": 2,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Pothos",
+        "watering": 7,
+        "light": {
+            "min": 2,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Spider Plant",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Snake Plant",
+        "watering": 14,
+        "light": {
+            "min": 0,
+            "max": 5
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Rubber Plant",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            5.5,
+            7.0
+        ]
+    },
+    {
+        "name": "Fiddle Leaf Fig",
+        "watering": 14,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.0
+        ]
+    },
+    {
+        "name": "Philodendron",
+        "watering": 7,
+        "light": {
+            "min": 3,
+            "max": 7
+        },
+        "ph": [
+            5.5,
+            7.5
+        ]
+    },
+    {
+        "name": "Monstera",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "String of Pearls",
+        "watering": 14,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.0
+        ]
+    },
+    {
+        "name": "Ponytail Palm",
+        "watering": 14,
+        "light": {
+            "min": 7,
+            "max": 10
+        },
+        "ph": [
+            7.0,
+            8.0
+        ]
+    },
+    {
+        "name": "ZZ Plant",
+        "watering": 14,
+        "light": {
+            "min": 0,
+            "max": 5
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Aloe Vera",
+        "watering": 14,
+        "light": {
+            "min": 6,
+            "max": 10
+        },
+        "ph": [
+            6.0,
+            7.0
+        ]
+    },
+    {
+        "name": "Calathea",
+        "watering": 7,
+        "light": {
+            "min": 3,
+            "max": 6
+        },
+        "ph": [
+            6.0,
+            6.5
+        ]
+    },
+    {
+        "name": "Jade Plant",
+        "watering": 14,
+        "light": {
+            "min": 6,
+            "max": 10
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Croton",
+        "watering": 7,
+        "light": {
+            "min": 6,
+            "max": 10
+        },
+        "ph": [
+            5.5,
+            6.5
+        ]
+    },
+    {
+        "name": "Ficus",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Dieffenbachia",
+        "watering": 7,
+        "light": {
+            "min": 2,
+            "max": 6
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Tradescantia",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Succulents",
+        "watering": 21,
+        "light": {
+            "min": 6,
+            "max": 10
+        },
+        "ph": [
+            6.0,
+            7.0
+        ]
+    },
+    {
+        "name": "African Violet",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Pilea",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            5.0,
+            7.0
+        ]
+    },
+    {
+        "name": "Yucca",
+        "watering": 14,
+        "light": {
+            "min": 6,
+            "max": 10
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Schefflera",
+        "watering": 14,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            5.0,
+            6.5
+        ]
+    },
+    {
+        "name": "Hoya",
+        "watering": 14,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.0
+        ]
+    },
+    {
+        "name": "Rubber Plant",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            5.5,
+            7.0
+        ]
+    },
+    {
+        "name": "Snake Plant",
+        "watering": 21,
+        "light": {
+            "min": 0,
+            "max": 5
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Spider Plant",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Peace Lily",
+        "watering": 7,
+        "light": {
+            "min": 0,
+            "max": 5
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Philodendron",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            5.0,
+            7.0
+        ]
+    },
+    {
+        "name": "Bamboo Palm",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Boston Fern",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 6
+        },
+        "ph": [
+            5.0,
+            6.0
+        ]
+    },
+    {
+        "name": "English Ivy",
+        "watering": 7,
+        "light": {
+            "min": 0,
+            "max": 5
+        },
+        "ph": [
+            6.0,
+            7.8
+        ]
+    },
+    {
+        "name": "Gardenia",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            5.0,
+            6.0
+        ]
+    },
+    {
+        "name": "Moth Orchid",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            5.5,
+            6.5
+        ]
+    },
+    {
+        "name": "Dumb Cane",
+        "watering": 7,
+        "light": {
+            "min": 2,
+            "max": 6
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Arrowhead Plant",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            6.0,
+            7.5
+        ]
+    },
+    {
+        "name": "Hydrangea",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 10
+        },
+        "ph": [
+            5.0,
+            6.2
+        ]
+    },
+    {
+        "name": "Bird of Paradise",
+        "watering": 7,
+        "light": {
+            "min": 6,
+            "max": 9
+        },
+        "ph": [
+            6.0,
+            7.0
+        ]
+    },
+    {
+        "name": "Orchid",
+        "watering": 7,
+        "light": {
+            "min": 4,
+            "max": 7
+        },
+        "ph": [
+            5.5,
+            6.5
+        ]
+    }
+]

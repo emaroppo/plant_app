@@ -1,0 +1,32 @@
+{
+    "plant_data": [
+        {
+            "name":str,
+            "watering":int #(days),
+            "ph": {
+                "min":int,
+                "max":int,
+            },
+            "light": {
+                "min":int,
+                "max":int,
+            } #(light intensity 0-10)
+        }
+    ],
+    "user_data": [
+        {
+            "username":str,
+            "user_info":obj,
+            "plants": [
+                {
+                    "name":str,
+                    "species":DBRef("plant_data", ObjectId("...")),
+                    "watering":int, #(days)
+                    "ph":int,
+                    "light":int,
+                    "last_watered":int, #(unix timestamp)
+                    "last_ph":int, #(unix timestamp)
+                }
+            }
+        ]
+    }
