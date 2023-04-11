@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from db_utils.db_manager import DBManager
-from bson.objectid import ObjectId
-from pymongo import MongoClient
+from classes.plants import Plant, PlantSpecies
+from bson import ObjectId, DBRef
+from classes.user import User
 from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
@@ -14,25 +15,19 @@ def home():
 
 
 @app.route("/signup", methods=["GET", "POST"])
-def signup():
+def singup():
     if request.method == "POST":
         username = request.form["username"]
-        password = generate_password_hash(request.form["password"])
+        password = request.form["password"]
         email = request.form["email"]
-        db = DBManager("plant_db")
-        user = db.user.get_user(username)
-        if user:
-            flash("Username already exists")
-            return redirect(url_for("signup"))
-        else:
-            user = dict()
-            user["username"] = username
-            user["password"] = password
-            user["email"] = email
 
-            db.user.add_user(user)
-            flash("User created successfully")
-            return redirect(url_for("login"))
+        if User.find_by_username(username):
+            return render_template("signup.html", error="Username already exists")
+
+        user = User(username=username, password=password, email=email)
+        user.save()
+
+        return redirect(url_for("login"))
     return render_template("signup.html")
 
 
@@ -41,19 +36,18 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        print(password)
-        db = DBManager("plant_db")
-        user = db.user.get_user(username)
-        print(user)
-        print(check_password_hash(user["password"], password))
-        if user and check_password_hash(user["password"], password):
-            session["user_id"] = str(user["_id"])
-            session["username"] = user["username"]
-            flash("Login successful")
-            return redirect(url_for("home"))
-        else:
-            flash("Incorrect credentials")
-            return redirect(url_for("login"))
+
+        user = User.find_by_username(username)
+
+        if not user:
+            return render_template("login.html", error="Invalid username or password")
+
+        if not check_password_hash(user.password, password):
+            return render_template("login.html", error="Invalid username or password")
+
+        session["user_id"] = str(user._id)
+
+        return redirect(url_for("profile", username=username))
 
     return render_template("login.html")
 
@@ -74,11 +68,11 @@ def users():
 
 @app.route("/profile/<username>")
 def profile(username):
-    db = DBManager("plant_db")
-    user = db.user.get_user(username, deref=True)
-    species = db.plant.get_plants()
+    user = User.find_by_username(username, deref=True)
+    species = PlantSpecies.get_all_species()
 
-    if "user_id" in session and str(user["_id"]) == session["user_id"]:
+    if "user_id" in session and str(user._id) == session["user_id"]:
+        print(user._id, session["user_id"])
         return render_template("my_profile.html", user=user, species=species)
     else:
         return render_template("profile.html", user=user, species=species)
@@ -94,7 +88,9 @@ def create_plant():
         plant["species"] = request.form["species"]
         plant["owner"] = request.form["user_id"]
 
-        plant_id = db.add_user_plant(plant)
+        plant = Plant(**plant)
+        plant.save()
+
         flash("Plant created successfully")
 
         return redirect(url_for("profile", username=request.form["username"]))
