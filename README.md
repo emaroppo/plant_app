@@ -6,7 +6,7 @@ Flask Application to track the needs & progresses of most common houseplants.
     - Receive info if plant species is DB 
 - Upload pictures and track plant growth
 
-##To Do:
+## To Do:
 1. Friend/follow system for users and plants
 2. Improve information
 3. Make it possible to attach measurements with pictures
