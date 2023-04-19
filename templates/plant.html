@@ -6,4 +6,21 @@
 <p>{{plant.name}} is a {{plant.species.name}}.
 </p>
 <p>It needs watering every {{plant.watering_frequency}} days.</p>
+{% if plant.pictures %}
+
+<ul>
+    {% for picture in plant.pictures %}
+    <li><img src="{{picture.path}}" width=250 alt="Plant Picture"></li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% if owner %}
+<p>Upload pictures of {{plant.name}}</p>
+<form action="/upload/plant_picture" method="post" enctype="multipart/form-data">
+    <input type="file" name="plant_picture_upload" id="plant_picture_upload">
+    <input type="hidden" value="{{plant._id}}" name="plant_id" id="plant_id">
+    <input type="hidden" value="{{plant.name}}" name="plant_name" id="plant_name">
+    <input type="submit" value="Upload">
+</form>
+{% endif %}
 {% endblock %}

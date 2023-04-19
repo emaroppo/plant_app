@@ -1,6 +1,11 @@
 {% extends "base.html" %}{%block title %}{{user.username}}'s Profile{% endblock %}
 {% block content %}
 <h1>{{user.username}}'s Profile</h1>
+{% if user.profile_picture %}
+<img src="{{user.profile_picture}}" alt="Profile Picture">
+{% else %}
+<img src="/static/pics/default_profile_picture.png" height="100" width="100" alt="Default Profile Picture">
+{% endif %}
 <p>Username: {{user.username}}</p>
 <p>Email: {{user.email}}</p>
 <a href="/users">Users</a>
@@ -15,5 +20,7 @@
 {% else %}
 <p>This user has no plants.</p>
 {% endif %}
+
+
 
 {% endblock %}

@@ -5,10 +5,23 @@ My profile
 {% endblock %}
 
 {% block content %}
-
-<h1>{{user.username}}'s Profile</h1>
-
 <a href="/users">Users</a>
+<h1>{{user.username}}'s Profile</h1>
+{% if user.profile_picture %}
+<img src="{{user.profile_picture}}" alt="Profile Picture">
+{% else %}
+<img src="/static/pics/default_profile_picture.png" height="100" width="100" alt="Default Profile Picture">
+<label for="profile_picture_upload">Upload a profile picture</label>
+<form action="/upload/upload_profile_picture" method="post" enctype="multipart/form-data">
+    <input type="file" name="profile_picture_upload" id="profile_picture_upload">
+    <input type="hidden" value="{{user._id}}" name="user_id" id="user_id">
+    <input type="hidden" value="{{user.username}}" name="username" id="username">
+    <input type="submit" value="Upload">
+</form>
+
+{% endif %}
+
+
 
 <h2>Plants</h2>
 {% if user.plants %}

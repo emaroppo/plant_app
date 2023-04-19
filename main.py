@@ -1,12 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from db_utils.db_manager import DBManager
 from classes.plants import Plant, PlantSpecies
 from bson import ObjectId, DBRef
 from classes.user import User
+from photo_upload.photo_app import photo_app
 from werkzeug.security import check_password_hash, generate_password_hash
+import pickle
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
-app.secret_key = "secret"
+app.register_blueprint(photo_app, url_prefix="/upload")
+
+with open("secret.pickle", "rb") as f:
+    secret = pickle.load(f)
+
+app.secret_key = secret
 
 
 @app.route("/")
@@ -46,6 +52,7 @@ def login():
             return render_template("login.html", error="Invalid username or password")
 
         session["user_id"] = str(user._id)
+        session["username"] = user.username
 
         return redirect(url_for("profile", username=username))
 
@@ -61,8 +68,7 @@ def logout():
 
 @app.route("/users")
 def users():
-    db = DBManager("plant_db")
-    users = db.user.get_users()
+    users = User.get_all_users()
     return render_template("users.html", users=users)
 
 
@@ -81,8 +87,6 @@ def profile(username):
 @app.route("/create_plant", methods=["GET", "POST"])
 def create_plant():
     if request.method == "POST":
-        db = DBManager("plant_db")
-
         plant = dict()
         plant["name"] = request.form["plant_name"]
         plant["species"] = request.form["species"]
@@ -98,9 +102,10 @@ def create_plant():
 
 @app.route("/plant/<plant_id>")
 def plant(plant_id):
-    db = DBManager("plant_db")
-    plant = db.user_plants.get_user_plant(plant_id, deref=True)
-    return render_template("plant.html", plant=plant)
+    plant = Plant.find_by_id(plant_id, deref=True)
+    if str(plant.owner["_id"]) == session["user_id"]:
+        return render_template("plant.html", plant=plant, owner=True)
+    return render_template("plant.html", plant=plant, owner=False)
 
 
 if __name__ == "__main__":

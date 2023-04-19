@@ -38,12 +38,15 @@ class Plant:
         owner,
         watering_frequency=None,
         _id=None,
+        pictures=[],
     ):
         self.name = name
         self.species = species
         self.watering_frequency = None
         self.owner = owner
         self.watering_frequency = watering_frequency
+        self.pictures = pictures
+
         if _id:
             self._id = _id
 
@@ -65,9 +68,9 @@ class Plant:
         db.user_plants.update_one({"_id": self._id}, {"$set": self.__dict__})
 
     @staticmethod
-    def find_plant_by_id(plant_id, db=db, deref=False):
+    def find_by_id(plant_id, db=db, deref=False):
         plant_id = ObjectId(plant_id)
-        plant = (db.user_plants.find_one({"_id": plant_id}),)
+        plant = db.user_plants.find_one({"_id": plant_id})
         if deref:
             plant["owner"] = db.dereference(plant["owner"])
             plant["species"] = PlantSpecies(**db.dereference(plant["species"]))

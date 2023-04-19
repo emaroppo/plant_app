@@ -4,6 +4,11 @@ from db_utils.db import db
 
 
 class User:
+    @staticmethod
+    def get_all_users():
+        users = db.users.find({})
+        return users
+
     def __init__(self, username, password, email, _id=None, plants=[]):
         self._id = _id
         self.username = username
