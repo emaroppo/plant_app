@@ -1,6 +1,6 @@
-#Untitled Plant App
+# Untitled Plant App
 Flask Application to track the needs & progresses of most common houseplants.
-##Current Features
+## Current Features
 - Create profile & login
 - Add plants to your collection & name them
     - Receive info if plant species is DB 
