@@ -34,15 +34,33 @@ My profile
 <p>This user has no plants.</p>
 {% endif %}
 <h3>Add a plant</h3>
-<form action="/create_plant" method="post">
+<form action="/plant/create_plant" method="post">
     <label for="plant_name">Name</label>
     <input type="text" name="plant_name" id="plant_name">
     <label for="species">Species</label>
     <select name="species" id="species">
-        {% for species in species %}
-        <option value="{{species._id}}">{{species.name}}</option>
-        {% endfor %}
+        <option value="none">Select a species</option>
     </select>
+    <script>
+        /* retrieve list of species from /plant/list_species via ajax request; list is provided in json format */
+        var species_list = document.getElementById('species');
+        const MyRequest = new Request('/plant/list_species');
+
+        fetch(MyRequest).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            plant_species = json;
+        }).then(function () {
+            /* populate select element with species */
+            for (var i = 0; i < plant_species.length; i++) {
+                var option = document.createElement("option");
+                option.value = plant_species[i]._id.$oid;
+                option.text = plant_species[i].name;
+                species_list.appendChild(option);
+            }
+        });
+
+    </script>
     <input type="hidden" value="{{user._id}}" name="user_id" id="user_id">
     <input type="hidden" value="{{user.username}}" name="username" id="username">
 

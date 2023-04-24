@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Search results for {{search_term}}{% endblock %}
+{% block content %}
+{% if search_results %}
+<h1>Search results for {{search_term}}</h1>
+<ul>
+    {% for result in search_results %}
+    <li><a href="/user/profile/{{result.username}}">{{result.username}}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No results found for {{search_term}}</p>
+{% endif %}
+
+{% endblock %}
