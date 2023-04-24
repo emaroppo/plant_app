@@ -21,19 +21,35 @@
             <ul class="navbar-nav">
                 {% if 'username' in session %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile/{{session['username']}}">Hello, {{session['username']}}</a>
+                    <a class="nav-link" href="/user/profile/{{session['username']}}">Hello, {{session['username']}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
+                    <a class="nav-link" href="/user/logout">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/user/login">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/signup">Sign up</a>
+                    <a class="nav-link" href="/user/signup">Sign up</a>
                 </li>
                 {% endif %}
+
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            Search
+                        </a>
+                        <div class="dropdown-menu">
+
+                            <!--searchbar dynnamically showing users whose username matches search term-->
+                            <form action="/search" method="post">
+                                <input type="text" name="search" id="search">
+                                <a href="/search" class="btn btn-primary" id="search-button">Search</a>
+                            </form>
+                            <div id="result"></div>
+                            <script src="/static/js/user-search.js"></script>
+                            <div class="dropdown-divider"></div>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
