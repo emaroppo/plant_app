@@ -9,6 +9,11 @@ class User:
         users = db.users.find({})
         return users
 
+    @staticmethod
+    def search_users(search_term):
+        users = db.users.find({"username": {"$regex": search_term}})
+        return users
+
     def __init__(self, username, password, email, _id=None, plants=[]):
         self._id = _id
         self.username = username
